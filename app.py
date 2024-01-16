@@ -9,7 +9,9 @@ import numpy as np
 app = Flask(__name__)
 
 # Load the data
-df = pd.read_csv("C:/Users/hnand/diabetes_prediction_dataset.csv.csv")
+file_path = r"C:\Users\msark\Downloads\Diabetes-Prediction-using-ML-main\Diabetes-Prediction-using-ML-main\diabetes_prediction_dataset.csv"
+
+df = pd.read_csv(file_path)
 
 # Separate features and target variable
 X = df.drop('diabetes', axis=1)
