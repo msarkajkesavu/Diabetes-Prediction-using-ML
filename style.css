@@ -1,0 +1,22 @@
+body {
+    background-color: #f0f0f0; /* Set the background color */
+    font-family: 'Arial', sans-serif; /* Choose a suitable font-family */
+}
+
+.container {
+    max-width: 800px; /* Set a maximum width for better readability */
+    margin: auto; /* Center the content within the container */
+    padding: 20px; /* Add some padding to the container */
+    background-color: #ffffff; /* Set the background color for the content area */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow for depth */
+}
+
+h1 {
+    color: #333333; /* Set the color of the heading */
+}
+
+form {
+    margin-top: 20px; /* Add some spacing between the heading and the form */
+}
+
+/* Add more styling as needed */
