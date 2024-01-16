@@ -9,7 +9,7 @@ import numpy as np
 app = Flask(__name__)
 
 # Load the data
-df = pd.read_csv("diabetes_prediction_dataset.csv")
+df = pd.read_csv("C:/Users/hnand/diabetes_prediction_dataset.csv.csv")
 
 # Separate features and target variable
 X = df.drop('diabetes', axis=1)
@@ -56,6 +56,8 @@ def index():
         return render_template('result.html', prediction=prediction)
 
     return render_template('index.html')
+
+    return render_template('beauty.css')
 
 if __name__ == '__main__':
     app.run(debug=True)

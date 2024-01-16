@@ -5,35 +5,108 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Diabetes Prediction Features</title>
+    <link rel="stylesheet" href="C:\Users\hnand\ML Project App\Templates\style.css">
 </head>
 <body>
     <h1>Diabetes Prediction</h1>
 
     <form method="post" action="/">
+        <label for="date-of-birth">Date of Birth:</label>
+        <input type="date" id="date-of-birth" name="date-of-birth" required onchange="calculateAge()"><br>
+
         <label for="age">Age:</label>
-        <input type="text" name="age" required><br>
+        <input type="text" id="age" name="age" readonly><br>
 
-        <label for="hypertension">Hypertension (0 for No, 1 for Yes):</label>
-        <input type="text" name="hypertension" required><br>
+        <script>
+            function calculateAge() {
+                var dob = document.getElementById("date-of-birth").value;
+                var today = new Date();
+                var birthDate = new Date(dob);
+                var age = today.getFullYear() - birthDate.getFullYear();
+                // Adjust for different month/day combinations
+                var m = today.getMonth() - birthDate.getMonth();
+                if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                    age--;
+                }
+                document.getElementById("age").value = age;
+            }
+        </script>
 
-        <label for="heart_disease">Heart Disease (0 for No, 1 for Yes):</label>
-        <input type="text" name="heart_disease" required><br>
-
-        <label for="smoking_history">Smoking History:</label>
-        <select name="smoking_history" required>
-            <option value="never">Never</option>
-            <option value="formerly">Formerly</option>
-            <option value="currently">Currently</option>
+        <label for="hypertension">Hypertension:</label>
+        <select id="hypertension" name="hypertension" required>
+            <option value="">Do You Suffer From Hypertension? (High Blood Pressure):</option>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
         </select><br>
 
+
+        <label for="heart_disease">Heart Disease:</label>
+        <select id="heart_disease" name="heart_disease" required>
+            <option value="">Do You suffer from any heart diseases?</option>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select><br>
+
+
+        <label for="smoking_history">Do you smoke?</label>
+        <select name="smoking_history" required>
+            <option value="never">Never</option>
+            <option value="formerly">Used to</option>
+            <option value="currently">Yes</option>
+        </select><br>
+
+        <label for="weight">Weight (kg):</label>
+        <input type="number" name="weight" id="weightInput" min="1" step="0.1">
+
+        <label for="height">Height (cm):</label>
+        <input type="number" name="height" id="heightInput" min="1" step="1">
+
         <label for="bmi">BMI:</label>
-        <input type="text" name="bmi" required><br>
+        <input type="text" name="bmi" id="bmiInput"><br>
+
+        <script>
+            function calculateBMI() {
+                const weight = parseFloat(document.getElementById("weightInput").value);
+                const heightInCm = parseFloat(document.getElementById("heightInput").value);
+
+                if ((!isNaN(weight) && weight > 0) && (!isNaN(heightInCm) && heightInCm > 0)) {
+                    // Convert height from cm to meters
+                    const heightInM = heightInCm / 100;
+
+                    const bmi = weight / (heightInM * heightInM);
+                    document.getElementById("bmiInput").value = bmi.toFixed(2);
+                } else {
+                    document.getElementById("bmiInput").value = ""; // Clear BMI if invalid input
+                }
+            }
+
+            // Attach input event listeners to recalculate BMI on input change
+            document.getElementById("weightInput").addEventListener("input", calculateBMI);
+            document.getElementById("heightInput").addEventListener("input", calculateBMI);
+
+            // Optionally, you can trigger the calculation when the page loads
+            document.addEventListener("DOMContentLoaded", calculateBMI);
+        </script>
+
+
+
+
+
 
         <label for="HbA1c_level">HbA1c Level:</label>
-        <input type="text" name="HbA1c_level" required><br>
+        <input type="range" name="HbA1c_level" id="HbA1c_level" min="1" max="10" required>
+        <span id="sliderValue">1</span><br>
 
-        <label for="blood_glucose_level">Blood Glucose Level:</label>
-        <input type="text" name="blood_glucose_level" required><br>
+        <script>
+            // Display the current value of the slider
+            document.getElementById("HbA1c_level").addEventListener("input", function() {
+                document.getElementById("sliderValue").innerText = this.value;
+            });
+        </script>
+
+        <label for="blood_glucose_level">Blood Glucose Level (mg/dL):</label>
+        <input type="number" name="blood_glucose_level" required min="70" max="130">
+
 
         <label for="gender">Gender:</label>
         <select name="gender" required>
