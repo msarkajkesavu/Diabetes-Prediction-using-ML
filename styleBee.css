@@ -177,3 +177,20 @@ form {
     border-radius: 5px;
     display: block;
 }
+
+.bottom_heading {
+    text-align: center;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    height: 25px;
+    width: 100%;
+    background-color: skyblue;
+    color: black;
+    z-index: 1;
+}
+
+.sticky {
+    position: sticky;
+    top: 170px;
+}
